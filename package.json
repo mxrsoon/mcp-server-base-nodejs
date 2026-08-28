@@ -4,18 +4,13 @@
   "description": "Base de servidor MCP em TypeScript com tools declaradas como métodos de classe, schemas e descrições inferidos dos tipos e do JSDoc.",
   "type": "module",
   "main": "dist/index.js",
-  "bin": {
-    "mcp-server-base-nodejs": "dist/index.js"
-  },
-  "files": [
-    "dist"
-  ],
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "build": "ttsc",
-    "typecheck": "ttsc --noEmit",
+    "typecheck": "ttsc --project tsconfig.test.json",
+    "test": "ttsx --project tsconfig.test.json test/tools.test.ts",
     "dev": "ttsx src/index.ts",
     "start": "node dist/index.js",
     "inspect": "npx @modelcontextprotocol/inspector node dist/index.js"

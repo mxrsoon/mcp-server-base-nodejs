@@ -16,5 +16,11 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
+
       - run: npm install
       - run: npm run build
+
+      # Prova que a inferção aconteceu: sobe o servidor em memória, lista as
+      # tools e confere que a descrição veio do JSDoc e o outputSchema do tipo
+      # de retorno. Um `ttsc` verde sozinho não pega uma lista de tools vazia.
+      - run: npm test
