@@ -47,7 +47,8 @@ Durante o desenvolvimento:
 
 ```bash
 npm run dev        # ttsx src/index.ts
-npm run typecheck  # ttsc --noEmit
+npm run typecheck  # ttsc --project tsconfig.test.json
+npm test           # smoke test das tools
 npm run inspect    # MCP Inspector apontando para o build
 ```
 
@@ -91,6 +92,12 @@ public async convert(props: {
 
 Para uma nova classe, registre em `src/server.ts`.
 
+## Testes
+
+`npm test` sobe o servidor via `InMemoryTransport`, lista as tools e verifica que a descrição veio do JSDoc e o `outputSchema` veio do tipo de retorno.
+
+Isso existe por causa de um modo de falha específico: quando o build pula o `ttsc`, nada quebra — o servidor sobe normalmente, só que sem tool alguma. Uma compilação verde não pega isso; o teste pega.
+
 ## Estrutura
 
 ```
@@ -99,6 +106,8 @@ src/
 ├── server.ts             # monta o McpServer a partir das classes de tools
 └── tools/
     └── ClockService.ts   # exemplo: hora atual em UTC
+test/
+└── tools.test.ts         # prova que a inferência aconteceu
 ```
 
 ## Trade-offs
